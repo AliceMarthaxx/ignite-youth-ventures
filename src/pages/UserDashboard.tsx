@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, BookOpen, Briefcase, TrendingUp, Calendar, Award } from "lucide-react";
+import { Link } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
 
 const UserDashboard = () => {
@@ -81,15 +82,17 @@ const UserDashboard = () => {
                     <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">Part-time</span>
                   </div>
                 </div>
-                <div className="p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer">
+                <Link to="/dashboard/user/training/2" className="block p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer">
                   <h4 className="font-semibold mb-1">Business Development Training</h4>
                   <p className="text-sm text-muted-foreground mb-2">Growth Academy • Online</p>
                   <div className="flex gap-2">
                     <span className="text-xs bg-secondary/10 text-secondary px-2 py-1 rounded">Training</span>
                     <span className="text-xs bg-bold-orange/10 text-bold-orange px-2 py-1 rounded">4 weeks</span>
                   </div>
-                </div>
-                <Button variant="outline" className="w-full">View All Opportunities</Button>
+                </Link>
+                <Link to="/dashboard/user/training">
+                  <Button variant="outline" className="w-full">View All Opportunities</Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

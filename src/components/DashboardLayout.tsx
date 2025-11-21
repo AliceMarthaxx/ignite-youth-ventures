@@ -21,7 +21,8 @@ const DashboardLayout = ({ children, userType }: DashboardLayoutProps) => {
     youth: [
       { icon: Home, label: "Dashboard", path: "/dashboard/user" },
       { icon: Users, label: "Mentorship", path: "/dashboard/user/mentorship" },
-      { icon: BookOpen, label: "Training", path: "/dashboard/user/training" },
+      { icon: BookOpen, label: "Training Catalog", path: "/dashboard/user/training" },
+      { icon: FileText, label: "My Learning", path: "/dashboard/user/my-learning" },
       { icon: Briefcase, label: "Jobs", path: "/dashboard/user/jobs" },
       { icon: Settings, label: "Settings", path: "/dashboard/user/settings" },
     ],
