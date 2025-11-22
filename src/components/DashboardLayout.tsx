@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Home, Users, BookOpen, Briefcase, Settings, LogOut, BarChart3, FileText } from "lucide-react";
+import { Home, Users, BookOpen, Briefcase, Settings, LogOut, BarChart3, FileText, Award } from "lucide-react";
 import ebpLogo from "@/assets/ebp-logo.png";
 
 interface DashboardLayoutProps {
@@ -20,17 +20,18 @@ const DashboardLayout = ({ children, userType }: DashboardLayoutProps) => {
   const menuItems = {
     youth: [
       { icon: Home, label: "Dashboard", path: "/dashboard/user" },
+      { icon: Award, label: "My Skills", path: "/dashboard/user/skills" },
       { icon: Users, label: "Mentorship", path: "/dashboard/user/mentorship" },
       { icon: BookOpen, label: "Training Catalog", path: "/dashboard/user/training" },
       { icon: FileText, label: "My Learning", path: "/dashboard/user/my-learning" },
-      { icon: Briefcase, label: "Jobs", path: "/dashboard/user/jobs" },
+      { icon: Briefcase, label: "Job Portal", path: "/dashboard/user/jobs" },
       { icon: Settings, label: "Settings", path: "/dashboard/user/settings" },
     ],
     provider: [
       { icon: Home, label: "Dashboard", path: "/dashboard/provider" },
-      { icon: Users, label: "My Mentees", path: "/dashboard/provider/mentees" },
+      { icon: Briefcase, label: "Manage Jobs", path: "/dashboard/provider/jobs" },
+      { icon: Users, label: "Manage Mentors", path: "/dashboard/provider/mentors" },
       { icon: BookOpen, label: "Programs", path: "/dashboard/provider/programs" },
-      { icon: Briefcase, label: "Job Posts", path: "/dashboard/provider/jobs" },
       { icon: BarChart3, label: "Analytics", path: "/dashboard/provider/analytics" },
       { icon: Settings, label: "Settings", path: "/dashboard/provider/settings" },
     ],
@@ -39,7 +40,7 @@ const DashboardLayout = ({ children, userType }: DashboardLayoutProps) => {
       { icon: Users, label: "Users", path: "/dashboard/admin/users" },
       { icon: Briefcase, label: "Providers", path: "/dashboard/admin/providers" },
       { icon: FileText, label: "Content", path: "/dashboard/admin/content" },
-      { icon: BarChart3, label: "Reports", path: "/dashboard/admin/reports" },
+      { icon: BarChart3, label: "Analytics", path: "/dashboard/admin/analytics" },
       { icon: Settings, label: "Settings", path: "/dashboard/admin/settings" },
     ],
   };
