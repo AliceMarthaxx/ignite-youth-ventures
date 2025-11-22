@@ -149,6 +149,64 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Dashboard Access Section */}
+      <section className="py-20 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-primary mb-4">Explore the Dashboards</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Choose your role to see what Youth Connect can do for you
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <Link to="/dashboard/user">
+              <div className="bg-card p-8 rounded-lg shadow-lg border-2 border-primary hover:shadow-xl transition-all hover:scale-105 cursor-pointer">
+                <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                  <Users className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-center text-card-foreground">Youth Dashboard</h3>
+                <p className="text-muted-foreground text-center mb-6">
+                  Access training, find mentors, browse jobs, and track your skills
+                </p>
+                <Button className="w-full bg-primary hover:bg-primary/90">
+                  View Youth Dashboard
+                </Button>
+              </div>
+            </Link>
+            
+            <Link to="/dashboard/provider">
+              <div className="bg-card p-8 rounded-lg shadow-lg border-2 border-secondary hover:shadow-xl transition-all hover:scale-105 cursor-pointer">
+                <div className="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                  <Briefcase className="h-8 w-8 text-secondary" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-center text-card-foreground">Provider Dashboard</h3>
+                <p className="text-muted-foreground text-center mb-6">
+                  Post jobs, manage mentors, and connect with youth entrepreneurs
+                </p>
+                <Button className="w-full bg-secondary hover:bg-secondary/90">
+                  View Provider Dashboard
+                </Button>
+              </div>
+            </Link>
+            
+            <Link to="/dashboard/admin">
+              <div className="bg-card p-8 rounded-lg shadow-lg border-2 border-accent hover:shadow-xl transition-all hover:scale-105 cursor-pointer">
+                <div className="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                  <Target className="h-8 w-8 text-accent" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-center text-card-foreground">Admin Dashboard</h3>
+                <p className="text-muted-foreground text-center mb-6">
+                  Manage content, view analytics, and oversee platform operations
+                </p>
+                <Button className="w-full bg-accent hover:bg-accent/90">
+                  View Admin Dashboard
+                </Button>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-secondary">
         <div className="container mx-auto px-4 text-center">
