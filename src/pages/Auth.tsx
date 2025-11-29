@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Chrome } from "lucide-react";
 import ebpLogo from "@/assets/ebp-logo.png";
 import { useToast } from "@/hooks/use-toast";
@@ -12,18 +12,25 @@ import { useToast } from "@/hooks/use-toast";
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Placeholder for authentication
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("signin-email") as string;
+    const password = formData.get("signin-password") as string;
+    
+    // Placeholder auth - store in localStorage
     setTimeout(() => {
+      localStorage.setItem("user", JSON.stringify({ email }));
       setIsLoading(false);
       toast({
-        title: "Sign in functionality coming soon!",
-        description: "Backend integration is needed for authentication.",
+        title: "Signed in successfully!",
+        description: "Welcome back to Youth Connect.",
       });
+      navigate("/dashboard/user");
     }, 1000);
   };
 
@@ -31,13 +38,27 @@ const Auth = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Placeholder for authentication
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("signup-name") as string;
+    const email = formData.get("signup-email") as string;
+    const role = formData.get("signup-role") as string;
+    
+    // Placeholder auth - store in localStorage
     setTimeout(() => {
+      localStorage.setItem("user", JSON.stringify({ email, name, role }));
       setIsLoading(false);
       toast({
-        title: "Sign up functionality coming soon!",
-        description: "Backend integration is needed for authentication.",
+        title: "Account created!",
+        description: "Welcome to Youth Connect.",
       });
+      // Navigate based on role
+      if (role === "provider") {
+        navigate("/dashboard/provider");
+      } else if (role === "admin") {
+        navigate("/dashboard/admin");
+      } else {
+        navigate("/dashboard/user");
+      }
     }, 1000);
   };
 
@@ -81,6 +102,7 @@ const Auth = () => {
                     <Label htmlFor="signin-email">Email</Label>
                     <Input
                       id="signin-email"
+                      name="signin-email"
                       type="email"
                       placeholder="your@email.com"
                       required
@@ -90,6 +112,7 @@ const Auth = () => {
                     <Label htmlFor="signin-password">Password</Label>
                     <Input
                       id="signin-password"
+                      name="signin-password"
                       type="password"
                       placeholder="••••••••"
                       required
@@ -127,6 +150,7 @@ const Auth = () => {
                     <Label htmlFor="signup-name">Full Name</Label>
                     <Input
                       id="signup-name"
+                      name="signup-name"
                       type="text"
                       placeholder="John Doe"
                       required
@@ -136,6 +160,7 @@ const Auth = () => {
                     <Label htmlFor="signup-email">Email</Label>
                     <Input
                       id="signup-email"
+                      name="signup-email"
                       type="email"
                       placeholder="your@email.com"
                       required
@@ -145,6 +170,7 @@ const Auth = () => {
                     <Label htmlFor="signup-password">Password</Label>
                     <Input
                       id="signup-password"
+                      name="signup-password"
                       type="password"
                       placeholder="••••••••"
                       required
@@ -154,6 +180,7 @@ const Auth = () => {
                     <Label htmlFor="signup-role">I am a...</Label>
                     <select
                       id="signup-role"
+                      name="signup-role"
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       required
                     >

@@ -306,29 +306,29 @@ const Index = () => {
             <div>
               <h4 className="font-bold mb-4">Platform</h4>
               <ul className="space-y-2 text-white/70">
-                <li><Link to="#" className="hover:text-white">Mentorship</Link></li>
-                <li><Link to="#" className="hover:text-white">Training</Link></li>
-                <li><Link to="#" className="hover:text-white">Jobs</Link></li>
+                <li><Link to="/dashboard/user/mentorship" className="hover:text-white">Mentorship</Link></li>
+                <li><Link to="/dashboard/user/training" className="hover:text-white">Training</Link></li>
+                <li><Link to="/dashboard/user/jobs" className="hover:text-white">Jobs</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-4">Company</h4>
               <ul className="space-y-2 text-white/70">
                 <li><Link to="#about" className="hover:text-white">About</Link></li>
-                <li><Link to="#" className="hover:text-white">Contact</Link></li>
-                <li><Link to="#" className="hover:text-white">Partners</Link></li>
+                <li><Link to="/auth" className="hover:text-white">Contact</Link></li>
+                <li><Link to="/dashboard/provider" className="hover:text-white">Partners</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-4">Legal</h4>
               <ul className="space-y-2 text-white/70">
-                <li><Link to="#" className="hover:text-white">Privacy</Link></li>
-                <li><Link to="#" className="hover:text-white">Terms</Link></li>
+                <li><Link to="#" className="hover:text-white">Privacy Policy</Link></li>
+                <li><Link to="#" className="hover:text-white">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/70">
-            <p>&copy; 2024 Youth Connect. All rights reserved.</p>
+            <p>&copy; 2025 EBP PLATFORM. All rights reserved.</p>
           </div>
         </div>
       </footer>
