@@ -1,9 +1,49 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Users, BookOpen, Briefcase, Target } from "lucide-react";
+import { ArrowRight, Users, BookOpen, Briefcase, Target, ChevronLeft, ChevronRight } from "lucide-react";
 import ebpLogo from "@/assets/ebp-logo.png";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import { useCallback, useEffect, useState } from "react";
+
+const heroSlides = [
+  {
+    title: "Empowering Youth Through",
+    highlight: "Opportunity",
+    description: "Connect with mentors, access training programs, and discover job opportunities tailored for young entrepreneurs and students.",
+    bgGradient: "from-primary via-secondary to-bright-blue",
+  },
+  {
+    title: "Build Your Skills With",
+    highlight: "Expert Training",
+    description: "Access world-class courses and workshops designed to accelerate your entrepreneurial journey and career growth.",
+    bgGradient: "from-secondary via-bright-blue to-primary",
+  },
+  {
+    title: "Connect With Industry",
+    highlight: "Mentors",
+    description: "Get guidance from experienced professionals who are passionate about helping young people succeed.",
+    bgGradient: "from-bright-blue via-primary to-secondary",
+  },
+];
 
 const Index = () => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 5000, stopOnInteraction: false }),
+  ]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    return () => { emblaApi.off("select", onSelect); };
+  }, [emblaApi]);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -18,42 +58,69 @@ const Index = () => {
               <Button variant="ghost">Sign In</Button>
             </Link>
             <Link to="/auth">
-              <Button>Get Started</Button>
+              <Button className="bg-bold-orange hover:bg-bold-orange/90">Get Started</Button>
             </Link>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-secondary to-bright-blue py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-white space-y-6">
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Empowering Youth Through{" "}
-                <span className="text-bold-orange">Opportunity</span>
-              </h1>
-              <p className="text-xl text-white/90">
-                Connect with mentors, access training programs, and discover job opportunities tailored for young entrepreneurs and students.
-              </p>
-              <div className="flex gap-4">
-                <Link to="/auth">
-                  <Button size="lg" className="bg-accent hover:bg-accent/90">
-                    Join Now <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link to="#about">
-                  <Button size="lg" variant="outline" className="border-white/80 text-white bg-white/10 hover:bg-white/20 hover:border-white">
-                    Learn More
-                  </Button>
-                </Link>
+      {/* Hero Carousel */}
+      <section className="relative overflow-hidden">
+        <div ref={emblaRef} className="overflow-hidden">
+          <div className="flex">
+            {heroSlides.map((slide, index) => (
+              <div key={index} className={`flex-[0_0_100%] min-w-0 relative bg-gradient-to-br ${slide.bgGradient} py-24 md:py-32`}>
+                <div className="container mx-auto px-4">
+                  <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <div className="text-white space-y-6">
+                      <h1 className="text-4xl md:text-6xl font-bold leading-tight animate-fade-in">
+                        {slide.title}{" "}
+                        <span className="text-bold-orange">{slide.highlight}</span>
+                      </h1>
+                      <p className="text-xl text-white/90">
+                        {slide.description}
+                      </p>
+                      <div className="flex gap-4">
+                        <Link to="/auth">
+                          <Button size="lg" className="bg-bold-orange hover:bg-bold-orange/80 text-white">
+                            Join Now <ArrowRight className="ml-2 h-5 w-5" />
+                          </Button>
+                        </Link>
+                        <Link to="#about">
+                          <Button size="lg" variant="outline" className="border-white/80 text-white bg-white/10 hover:bg-white/20 hover:border-white">
+                            Learn More
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="hidden md:block relative">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-bold-orange/20 to-white/30 rounded-full blur-3xl scale-110"></div>
+                      <img src={ebpLogo} alt="EBP" className="relative w-full max-w-md mx-auto drop-shadow-2xl filter brightness-110" />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="hidden md:block relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-bold-orange/20 to-white/30 rounded-full blur-3xl scale-110"></div>
-              <img src={ebpLogo} alt="EBP" className="relative w-full max-w-md mx-auto drop-shadow-2xl filter brightness-110" />
-            </div>
+            ))}
           </div>
+        </div>
+        
+        {/* Navigation Arrows */}
+        <button onClick={scrollPrev} className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur transition-all">
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+        <button onClick={scrollNext} className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur transition-all">
+          <ChevronRight className="h-6 w-6" />
+        </button>
+        
+        {/* Dots */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollTo(index)}
+              className={`w-3 h-3 rounded-full transition-all ${selectedIndex === index ? "bg-white w-8" : "bg-white/50 hover:bg-white/70"}`}
+            />
+          ))}
         </div>
       </section>
 
