@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Chrome } from "lucide-react";
 import ebpLogo from "@/assets/ebp-logo.png";
 import { useToast } from "@/hooks/use-toast";
 
@@ -37,6 +37,17 @@ const Auth = () => {
       toast({
         title: "Sign up functionality coming soon!",
         description: "Backend integration is needed for authentication.",
+      });
+    }, 1000);
+  };
+
+  const handleGoogleSignIn = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      toast({
+        title: "Google sign-in coming soon!",
+        description: "Backend integration is needed for Google authentication.",
       });
     }, 1000);
   };
@@ -87,6 +98,26 @@ const Auth = () => {
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? "Signing in..." : "Sign In"}
                   </Button>
+                  
+                  <div className="relative my-4">
+                    <div className="absolute inset-0 flex items-center">
+                      <span className="w-full border-t" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                      <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    className="w-full" 
+                    onClick={handleGoogleSignIn}
+                    disabled={isLoading}
+                  >
+                    <Chrome className="mr-2 h-4 w-4" />
+                    Sign in with Google
+                  </Button>
                 </form>
               </TabsContent>
               
@@ -134,6 +165,26 @@ const Auth = () => {
                   </div>
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? "Creating account..." : "Create Account"}
+                  </Button>
+                  
+                  <div className="relative my-4">
+                    <div className="absolute inset-0 flex items-center">
+                      <span className="w-full border-t" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                      <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    className="w-full" 
+                    onClick={handleGoogleSignIn}
+                    disabled={isLoading}
+                  >
+                    <Chrome className="mr-2 h-4 w-4" />
+                    Sign up with Google
                   </Button>
                 </form>
               </TabsContent>
