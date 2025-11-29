@@ -43,14 +43,15 @@ const Index = () => {
                   </Button>
                 </Link>
                 <Link to="#about">
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                  <Button size="lg" variant="outline" className="border-white/80 text-white bg-white/10 hover:bg-white/20 hover:border-white">
                     Learn More
                   </Button>
                 </Link>
               </div>
             </div>
-            <div className="hidden md:block">
-              <img src={ebpLogo} alt="EBP" className="w-full max-w-md mx-auto drop-shadow-2xl" />
+            <div className="hidden md:block relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-bold-orange/20 to-white/30 rounded-full blur-3xl scale-110"></div>
+              <img src={ebpLogo} alt="EBP" className="relative w-full max-w-md mx-auto drop-shadow-2xl filter brightness-110" />
             </div>
           </div>
         </div>
