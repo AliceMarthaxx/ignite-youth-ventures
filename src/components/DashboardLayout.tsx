@@ -1,8 +1,9 @@
-import { ReactNode } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { ReactNode, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Home, Users, BookOpen, Briefcase, Settings, LogOut, BarChart3, FileText, Award } from "lucide-react";
 import ebpLogo from "@/assets/ebp-logo.png";
+import { useAuth } from "@/hooks/useAuth";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -10,11 +11,16 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout = ({ children, userType }: DashboardLayoutProps) => {
-  const navigate = useNavigate();
+  const { logout, requireAuth, isLoading, isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (!isLoading) {
+      requireAuth();
+    }
+  }, [isLoading, isAuthenticated]);
 
   const handleLogout = () => {
-    // Placeholder for logout functionality
-    navigate("/");
+    logout();
   };
 
   const menuItems = {
