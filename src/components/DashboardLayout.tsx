@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Home, Users, BookOpen, Briefcase, Settings, LogOut, BarChart3, FileText, Award } from "lucide-react";
+import { Home, Users, BookOpen, Briefcase, Settings, LogOut, BarChart3, FileText, Award, FolderHeart } from "lucide-react";
 import ebpLogo from "@/assets/ebp-logo.png";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -31,7 +31,7 @@ const DashboardLayout = ({ children, userType }: DashboardLayoutProps) => {
       { icon: BookOpen, label: "Training Catalog", path: "/dashboard/user/training" },
       { icon: FileText, label: "My Learning", path: "/dashboard/user/my-learning" },
       { icon: Briefcase, label: "Job Portal", path: "/dashboard/user/jobs" },
-      { icon: Settings, label: "Settings", path: "/dashboard/user/settings" },
+      { icon: FolderHeart, label: "My Items", path: "/dashboard/user/my-items" },
     ],
     provider: [
       { icon: Home, label: "Dashboard", path: "/dashboard/provider" },

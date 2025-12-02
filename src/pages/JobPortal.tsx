@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Search, MapPin, Briefcase, Clock, Building } from "lucide-react";
 import { Link } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
+import { useToast } from "@/hooks/use-toast";
 import {
   Select,
   SelectContent,
@@ -65,6 +66,33 @@ const JobPortal = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [jobType, setJobType] = useState("all");
   const [location, setLocation] = useState("all");
+  const { toast } = useToast();
+
+  const handleSaveJob = (job: typeof jobListings[0]) => {
+    const savedJobs = JSON.parse(localStorage.getItem("savedJobs") || "[]");
+    const jobData = {
+      jobId: job.id,
+      title: job.title,
+      company: job.company,
+      location: job.location,
+      type: job.type,
+      savedDate: new Date().toLocaleDateString(),
+    };
+    
+    if (!savedJobs.some((j: any) => j.jobId === job.id)) {
+      savedJobs.push(jobData);
+      localStorage.setItem("savedJobs", JSON.stringify(savedJobs));
+      toast({
+        title: "Job Saved!",
+        description: "You can view this job in My Items.",
+      });
+    } else {
+      toast({
+        title: "Already Saved",
+        description: "This job is already in your saved list.",
+      });
+    }
+  };
 
   const filteredJobs = jobListings.filter((job) => {
     const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -163,7 +191,7 @@ const JobPortal = () => {
                   <Link to={`/dashboard/user/jobs/${job.id}`} className="flex-1">
                     <Button variant="default" className="w-full">View Details</Button>
                   </Link>
-                  <Button variant="outline">Save</Button>
+                  <Button variant="outline" onClick={() => handleSaveJob(job)}>Save</Button>
                 </div>
               </CardContent>
             </Card>

@@ -15,6 +15,7 @@ import JobPortal from "./pages/JobPortal";
 import JobDetail from "./pages/JobDetail";
 import Mentorship from "./pages/Mentorship";
 import MySkills from "./pages/MySkills";
+import MyItems from "./pages/MyItems";
 import ManageJobs from "./pages/provider/ManageJobs";
 import ManageMentors from "./pages/provider/ManageMentors";
 import Analytics from "./pages/admin/Analytics";
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/dashboard/user/my-learning" element={<MyLearning />} />
           <Route path="/dashboard/user/jobs" element={<JobPortal />} />
           <Route path="/dashboard/user/jobs/:jobId" element={<JobDetail />} />
+          <Route path="/dashboard/user/my-items" element={<MyItems />} />
           
           {/* Provider Routes */}
           <Route path="/dashboard/provider" element={<ProviderDashboard />} />
