@@ -12,10 +12,55 @@ const JobDetail = () => {
   const { toast } = useToast();
 
   const handleApply = () => {
+    // Save to applied jobs history
+    const appliedJobs = JSON.parse(localStorage.getItem("appliedJobs") || "[]");
+    const jobData = {
+      jobId: job.id,
+      title: job.title,
+      company: job.company,
+      location: job.location,
+      type: job.type,
+      appliedDate: new Date().toLocaleDateString(),
+    };
+    
+    // Avoid duplicates
+    if (!appliedJobs.some((j: any) => j.jobId === job.id)) {
+      appliedJobs.push(jobData);
+      localStorage.setItem("appliedJobs", JSON.stringify(appliedJobs));
+    }
+    
     toast({
       title: "Application Submitted!",
       description: "Your application has been sent to the employer.",
     });
+  };
+
+  const handleSave = () => {
+    // Save to saved jobs history
+    const savedJobs = JSON.parse(localStorage.getItem("savedJobs") || "[]");
+    const jobData = {
+      jobId: job.id,
+      title: job.title,
+      company: job.company,
+      location: job.location,
+      type: job.type,
+      savedDate: new Date().toLocaleDateString(),
+    };
+    
+    // Avoid duplicates
+    if (!savedJobs.some((j: any) => j.jobId === job.id)) {
+      savedJobs.push(jobData);
+      localStorage.setItem("savedJobs", JSON.stringify(savedJobs));
+      toast({
+        title: "Job Saved!",
+        description: "You can view this job in My Items.",
+      });
+    } else {
+      toast({
+        title: "Already Saved",
+        description: "This job is already in your saved list.",
+      });
+    }
   };
 
   // Mock job data
@@ -95,7 +140,7 @@ const JobDetail = () => {
           <CardContent className="space-y-6">
             <div className="flex gap-3">
               <Button size="lg" className="flex-1" onClick={handleApply}>Apply Now</Button>
-              <Button size="lg" variant="outline">Save Job</Button>
+              <Button size="lg" variant="outline" onClick={handleSave}>Save Job</Button>
             </div>
 
             <Separator />
