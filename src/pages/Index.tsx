@@ -315,15 +315,15 @@ const Index = () => {
               <h4 className="font-bold mb-4">Company</h4>
               <ul className="space-y-2 text-white/70">
                 <li><Link to="#about" className="hover:text-white">About</Link></li>
-                <li><Link to="/auth" className="hover:text-white">Contact</Link></li>
+                <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
                 <li><Link to="/dashboard/provider" className="hover:text-white">Partners</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-4">Legal</h4>
               <ul className="space-y-2 text-white/70">
-                <li><Link to="#" className="hover:text-white">Privacy Policy</Link></li>
-                <li><Link to="#" className="hover:text-white">Terms of Service</Link></li>
+                <li><Link to="/privacy-policy" className="hover:text-white">Privacy Policy</Link></li>
+                <li><Link to="/terms-of-service" className="hover:text-white">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
