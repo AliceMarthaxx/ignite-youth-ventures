@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,46 +28,53 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          
-          {/* User Routes */}
-          <Route path="/dashboard/user" element={<UserDashboard />} />
-          <Route path="/dashboard/user/skills" element={<MySkills />} />
-          <Route path="/dashboard/user/mentorship" element={<Mentorship />} />
-          <Route path="/dashboard/user/training" element={<TrainingCatalog />} />
-          <Route path="/dashboard/user/training/:courseId" element={<CourseDetail />} />
-          <Route path="/dashboard/user/my-learning" element={<MyLearning />} />
-          <Route path="/dashboard/user/jobs" element={<JobPortal />} />
-          <Route path="/dashboard/user/jobs/:jobId" element={<JobDetail />} />
-          <Route path="/dashboard/user/my-items" element={<MyItems />} />
-          
-          {/* Provider Routes */}
-          <Route path="/dashboard/provider" element={<ProviderDashboard />} />
-          <Route path="/dashboard/provider/jobs" element={<ManageJobs />} />
-          <Route path="/dashboard/provider/mentors" element={<ManageMentors />} />
-          
-          {/* Admin Routes */}
-          <Route path="/dashboard/admin" element={<AdminDashboard />} />
-          <Route path="/dashboard/admin/analytics" element={<Analytics />} />
-          <Route path="/dashboard/admin/content" element={<ManageContent />} />
-          
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // ✅ useEffect must be inside the component
+  useEffect(() => {
+    document.title = "EBP Platform";
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+
+            {/* User Routes */}
+            <Route path="/dashboard/user" element={<UserDashboard />} />
+            <Route path="/dashboard/user/skills" element={<MySkills />} />
+            <Route path="/dashboard/user/mentorship" element={<Mentorship />} />
+            <Route path="/dashboard/user/training" element={<TrainingCatalog />} />
+            <Route path="/dashboard/user/training/:courseId" element={<CourseDetail />} />
+            <Route path="/dashboard/user/my-learning" element={<MyLearning />} />
+            <Route path="/dashboard/user/jobs" element={<JobPortal />} />
+            <Route path="/dashboard/user/jobs/:jobId" element={<JobDetail />} />
+            <Route path="/dashboard/user/my-items" element={<MyItems />} />
+
+            {/* Provider Routes */}
+            <Route path="/dashboard/provider" element={<ProviderDashboard />} />
+            <Route path="/dashboard/provider/jobs" element={<ManageJobs />} />
+            <Route path="/dashboard/provider/mentors" element={<ManageMentors />} />
+
+            {/* Admin Routes */}
+            <Route path="/dashboard/admin" element={<AdminDashboard />} />
+            <Route path="/dashboard/admin/analytics" element={<Analytics />} />
+            <Route path="/dashboard/admin/content" element={<ManageContent />} />
+
+            {/* Catch-all */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
